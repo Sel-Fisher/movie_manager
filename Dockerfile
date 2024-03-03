@@ -1,23 +1,21 @@
 FROM python:3.10.4-slim-buster
+
 LABEL maitaner="sabsdaid@gmail.com"
 
+ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR app/
+WORKDIR /app
 
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
+RUN adduser --disabled-password --no-create-home django-user
 
 COPY . .
-
-RUN adduser \
-        --disabled-password \
-        --no-create-home \
-        django-user \
 
 RUN chown -R django-user:django-user /app
 
 USER django-user
 
-ENTRYPOINT ["gunicorn", "core.wsgi"]
+CMD ["gunicorn", "core.wsgi"]
