@@ -14,7 +14,9 @@ COPY . .
 RUN adduser \
         --disabled-password \
         --no-create-home \
-        django-user
+        django-user \
+
+RUN chown -R django-user:django-user /app
 
 USER django-user
 
