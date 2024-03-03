@@ -1,9 +1,0 @@
-venv/
-.env
-.python-versio
-checklist.md
-README.md
-.gitignore
-.github
-.flake8
-**__pycache__

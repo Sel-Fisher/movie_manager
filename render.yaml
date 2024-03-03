@@ -1,4 +1,0 @@
-services:
-  - name: movie_manager
-    type: compose
-    path: docker-compose.yml
