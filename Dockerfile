@@ -14,8 +14,8 @@ RUN adduser --disabled-password --no-create-home django-user
 
 COPY . .
 
-RUN chown -R django-user:django-user /app
+RUN chown -R www-data:www-data /app
 
-USER django-user
+USER www-data
 
 CMD ["gunicorn", "core.wsgi"]
