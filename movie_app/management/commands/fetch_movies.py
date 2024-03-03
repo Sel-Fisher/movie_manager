@@ -40,29 +40,43 @@ class Command(BaseCommand):
                         params={
                             "apikey": API_KEY,
                             "i": movie_data["imdbID"],
-                            "r": "json"
-                        }
+                            "r": "json",
+                        },
                     )
                     movie_details = detail_response.json()
                     if "Title" in movie_details:
                         with transaction.atomic():
-                            director_name = movie_details["Director"].replace(",", "").split(" ")[:2]
+                            director_name = (
+                                movie_details["Director"]
+                                .replace(",", "")
+                                .split(" ")[:2]
+                            )
                             director, _ = Director.objects.get_or_create(
                                 first_name=director_name[0],
-                                last_name=director_name[1] if len(director_name) % 2 == 0 else ""
+                                last_name=(
+                                    director_name[1]
+                                    if len(director_name) % 2 == 0
+                                    else ""
+                                ),
                             )
 
                             movie, created = Movie.objects.get_or_create(
                                 title=movie_details["Title"],
                                 year=movie_details["Year"],
-                                director=director
+                                director=director,
                             )
                             if created:
-                                for actor_name in movie_details["Actors"].split(", "):
+                                for actor_name in movie_details[
+                                    "Actors"
+                                ].split(", "):
                                     actor_name = actor_name.split(" ")
                                     actor, _ = Actor.objects.get_or_create(
                                         first_name=actor_name[0],
-                                        last_name=actor_name[1] if len(actor_name) % 2 == 0 else ""
+                                        last_name=(
+                                            actor_name[1]
+                                            if len(actor_name) % 2 == 0
+                                            else ""
+                                        ),
                                     )
                                     movie.actors.add(actor)
 
