@@ -89,9 +89,9 @@ To get started with the Movie Manager, follow these steps:
 ## API Endpoints
 
 ### Authentication
-* `POST /api/auth/register/`: Register a new user. Requires providing email, and password in the request body.
-* `POST /api/auth/token/`: Obtain a JWT token by providing email and password in the request body.
-* `POST /api/auth/token/refresh/`: Refresh an existing JWT token by providing a valid refresh token in the request body.
+* `POST /api/user/register/`: Register a new user. Requires providing email, and password in the request body.
+* `POST /api/user/token/`: Obtain a JWT token by providing email and password in the request body.
+* `POST /api/user/token/refresh/`: Refresh an existing JWT token by providing a valid refresh token in the request body.
 
 ### Movies
 * `GET /api/movies/`: Retrieve a list of all movies. You can filter the movies by year, director name, and actor name by providing the corresponding query parameters:
@@ -112,7 +112,8 @@ To get started with the Movie Manager, follow these steps:
 
 ## Authentication and Authorization
 
-The API supports user registration and authentication using JWT tokens. Only administrators have permission to manage movies, while regular users can only view movie information.
+The API supports user registration and authentication using JWT tokens. Only administrators have permission to manage movies, while regular users can only view movie information. 
+(If you use Google Chrome, you can install ModHeader extension to put token you get in it and provide your token to web application)
 ## Contributing
 Contributions to the Movie Database project are welcome! If you'd like to contribute, please fork the repository, make your changes, and submit a pull request. Be sure to follow the contribution guidelines outlined in the repository.
 
